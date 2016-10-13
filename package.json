@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "gulp-less": "^3.1.0",
     "three": "^0.81.2"
   },
   "devDependencies": {

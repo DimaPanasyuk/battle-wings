@@ -14,15 +14,26 @@ const config = {
       all: `${app}/js/**/*.js`,
       main: `${app}/js/app.js`
     },
-    styles: `${app}/styles`
+    styles: {
+      all: `${app}/styles/**/*.less`,
+      main: `${app}/styles/main.less`
+    }
   },
   build: {
     js: `${build}/js`,
-    styles: `${build}/css`
+    styles: `${build}/styles`
   }
 };
 
-// TODO: add less tasks here!))
+gulp.task('less', () => {
+  return gulp.src(config.dev.styles.main)
+          .pipe(less())
+          .pipe(gulp.dest(config.build.styles));
+});
+gulp.task('watch-less', ['less'], () => {
+  gulp.watch(config.dev.styles.all, ['less']);
+});
+
 gulp.task('js', () => {
   return gulp.src(config.dev.js.main, { read: false })
           .pipe(bro({
@@ -34,13 +45,14 @@ gulp.task('watch-js', ['js'], () => {
   gulp.watch(config.dev.js.all, ['js']);
 });
 
-gulp.task('sync', ['watch-js'], () => {
+gulp.task('sync', ['watch-js', 'watch-less'], () => {
   browserSync.init({
     server: './public'
   });
 
   gulp.watch('public/index.html').on('change', browserSync.reload);
   gulp.watch(`${config.build.js}/app.js`).on('change', browserSync.reload);
+  gulp.watch(`${config.build.styles}/main.css`).on('change', browserSync.reload);
 });
 
 gulp.task('default', ['sync']);
