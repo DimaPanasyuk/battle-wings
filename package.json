@@ -5,18 +5,21 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "webpack-dev-server --colors --inline"
+    "start": "webpack --watch",
+    "server": "lite-server"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/three": "^0.0.24",
     "babel-core": "^6.17.0",
     "babel-loader": "^6.2.5",
     "babel-preset-es2015": "^6.16.0",
     "css-loader": "^0.25.0",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
+    "lite-server": "^2.2.2",
     "style-loader": "^0.13.1",
     "three": "^0.81.2",
     "ts-loader": "^0.9.4",
