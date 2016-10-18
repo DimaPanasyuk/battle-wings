@@ -1,0 +1,6 @@
+{
+  "files": ["./public/build/build.js", "./public/index.html"],
+  "server": {
+    "baseDir": "./public"
+  }
+}
