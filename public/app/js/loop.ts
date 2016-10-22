@@ -12,22 +12,44 @@ import { plane } from './objects/plane/init';
 import { ground } from './objects/ground/init';
 
 // Remove this from here
-const KEY_UP = 38;
-const KEY_DOWN = 40;
-const KEY_LEFT = 37;
-const KEY_RIGHT = 39;
+const KEY_UP: number = 87;
+const KEY_DOWN: number = 83;
+const KEY_LEFT: number = 65;
+const KEY_RIGHT: number = 68;
+const KEY_SPACE: number = 32;
 
 let keyUpActive: boolean = false;
 let keyDownActive: boolean = false;
 let keyLeftActive: boolean = false;
 let keyRightActive: boolean = false;
-
+let keySpaceActive: boolean = false;
 
 window.addEventListener('mousemove', handleMouseMove, false);
 window.addEventListener('keydown', handleKeyDown, false);
 window.addEventListener('keyup', handleKeyUp, false);
 
 export function loop() {
+
+  if (keyLeftActive) {
+    plane.moveLeft();
+  }
+
+  if (keyRightActive) {
+    plane.moveRight();
+  }
+
+  if (!keyLeftActive && !keyRightActive) {
+    plane.centerTail();
+  }
+
+  if (keySpaceActive) {
+    plane.shoot();
+  }
+
+  if (keyUpActive) {
+    plane.move();
+  }
+
   plane.propeller.rotation.z += 0.6;
   renderer.render(scene, camera);
 	requestAnimationFrame(loop);
@@ -42,10 +64,13 @@ function handleMouseMove({ clientX, clientY}) {
   vector.unproject( camera );
   let dir = vector.sub( camera.position ).normalize();
   let distance = - camera.position.z / dir.z;
-  let pos = camera.position.clone().add( dir.multiplyScalar( distance ) );
-  pos.z = -500;
-  plane.mesh.lookAt(pos);
-  camera.lookAt(pos);
+  let posCamera = camera.position.clone().add( dir.multiplyScalar( distance ) );
+  let posPlane = camera.position.clone().add( dir.multiplyScalar( distance ) );
+  posCamera.z = -2500;
+  posPlane.z = -20000;
+  plane.mesh.lookAt(posPlane);
+  camera.lookAt(posCamera);
+  // console.log(posPlane, posCamera);
 }
 
 function handleKeyDown(ev) {
@@ -61,6 +86,9 @@ function handleKeyDown(ev) {
       break;
     case KEY_RIGHT:
       keyRightActive = true;
+      break;
+    case KEY_SPACE:
+      keySpaceActive = true;
       break;
     default:
   }
@@ -79,6 +107,9 @@ function handleKeyUp(ev) {
       break;
     case KEY_RIGHT:
       keyRightActive = false;
+      break;
+    case KEY_SPACE:
+      keySpaceActive = false;
       break;
     default:
   }
