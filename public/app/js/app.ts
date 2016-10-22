@@ -15,7 +15,7 @@ function init() {
 
   createLights();
 
-  // createGround();
+  createGround();
 
   createPlane();
 

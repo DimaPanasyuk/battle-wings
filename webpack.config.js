@@ -2,7 +2,7 @@ const webpack = require('webpack');
 
 module.exports = {
   cache: true,
-  devtool: 'cheap-eval-source-map',
+  devtool: 'eval',
   entry: './public/app/js/app.ts',
   output: {
     path: `${__dirname}/public/build`,
