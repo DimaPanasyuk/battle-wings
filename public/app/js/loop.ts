@@ -28,7 +28,7 @@ window.addEventListener('keydown', handleKeyDown, false);
 window.addEventListener('keyup', handleKeyUp, false);
 
 export function loop() {
-  // plane.propeller.rotation.x += 0.1;
+  plane.propeller.rotation.z += 0.6;
   renderer.render(scene, camera);
 	requestAnimationFrame(loop);
 }
