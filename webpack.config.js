@@ -3,13 +3,14 @@ const webpack = require('webpack');
 const HtmlPlugin = require('html-webpack-plugin');
 
 const rootDir = path.resolve(__dirname, '.');
+const ENV = process.env.NODE_ENV;
 
-module.exports = {
+let config = {
   cache: true,
   devtool: 'eval',
   entry: path.resolve(rootDir, 'public', 'app', 'js', 'app'),
   output: {
-    path: path.resolve(rootDir, 'dist'),
+    path: path.resolve(rootDir, 'public', 'build'),
     filename: 'build.js'
   },
   resolve: {
@@ -38,3 +39,18 @@ module.exports = {
     port: 3000
   }
 };
+
+if (ENV === 'production') {
+  config.plugins.push(new webpack.optimize.UglifyJsPlugin({
+    debug: false,
+    minimize: true,
+    output: {
+      comments: false
+    },
+    compressor: {
+      warnings: false
+    }
+  }));
+}
+
+module.exports = config;
