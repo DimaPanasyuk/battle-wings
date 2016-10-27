@@ -8,12 +8,13 @@
     "start": "webpack-dev-server --colors --progress --inline",
     "clean:all": "rimraf node_modules public/build/build.js public/build/index.html",
     "clean:prod": "rimraf public/build/build.js rimraf public/build/index.html",
-    "build:prod": "npm run clean:prod && NODE_ENV=production webpack --colors --progress -p"
+    "build:prod": "npm run clean:prod && NODE_ENV=production webpack --colors --progress -p && node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.14.0",
     "three": "^0.81.2"
   },
   "devDependencies": {
