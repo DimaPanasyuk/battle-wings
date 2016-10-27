@@ -31,12 +31,12 @@ let config = {
     new HtmlPlugin({
       filename: 'index.html',
       inject: 'body',
-      template: path.resolve(rootDir, 'public', 'index.html')
+      template: path.resolve(rootDir, 'public', 'app', 'index.html')
     })
   ],
   devServer: {
     contentBase: path.resolve(rootDir, 'public', 'build'),
-    port: 3000
+    port: 3200
   }
 };
 
