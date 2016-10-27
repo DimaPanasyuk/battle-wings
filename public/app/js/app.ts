@@ -5,7 +5,6 @@ import { loop } from './loop';
 import { createGround, createPlane } from './objects';
 
 import '../styles/main.less';
-// this is comment
 
 window.addEventListener('load', init, false);
 

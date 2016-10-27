@@ -69,8 +69,6 @@ function handleMouseMove({ clientX, clientY}) {
   posCamera.z = -2500;
   posPlane.z = -20000;
   plane.mesh.lookAt(posPlane);
-  camera.lookAt(posCamera);
-  // console.log(posPlane, posCamera);
 }
 
 function handleKeyDown(ev) {
